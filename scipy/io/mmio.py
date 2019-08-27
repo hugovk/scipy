@@ -806,12 +806,8 @@ def _is_fromfile_compatible(stream):
     """
     Check whether `stream` is compatible with numpy.fromfile.
 
-    Passing a gzipped file object to ``fromfile/fromstring`` doesn't work with
-    Python3.
+    Passing a gzipped file object to ``fromfile/fromstring`` doesn't work.
     """
-    if sys.version_info[0] < 3:
-        return True
-
     bad_cls = []
     try:
         import gzip
