@@ -9,11 +9,7 @@ import sys
 import zlib
 
 from io import BytesIO
-
-if sys.version_info[0] >= 3:
-    cStringIO = BytesIO
-else:
-    from cStringIO import StringIO as cStringIO
+cStringIO = BytesIO
 
 from tempfile import mkstemp
 from contextlib import contextmanager

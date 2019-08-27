@@ -24,11 +24,9 @@ def main():
 
     def _open(fn, *args, **kwargs):
         r"""Handle UTF-8 encoding when loading under Py3"""
-        # Issue is that default encoding under Py3 is
+        # Issue is that default encoding is
         # locale dependent (might even be ASCII),
-        # so need to specify the encoding.  Py2 doesn't care.
-        if sys.version_info.major < 3:
-            return open(fn, *args, **kwargs)
+        # so need to specify the encoding.
         return io.open(fn, *args, encoding='utf-8', **kwargs)
 
     for fn in args:

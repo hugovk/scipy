@@ -5,11 +5,7 @@ import os
 import sys
 from os.path import join as pjoin
 from scipy._lib.six import xrange
-
-if sys.version_info[0] >= 3:
-    from io import StringIO
-else:
-    from cStringIO import StringIO
+from io import StringIO
 
 import numpy as np
 
