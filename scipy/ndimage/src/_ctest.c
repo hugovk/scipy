@@ -15,22 +15,12 @@
 #endif
 
 
-#if defined(OLDAPI) && PY_VERSION_HEX < 0x03000000
-static void
-_destructor(void *cobject, void *callback_data)
-{
-    PyMem_Free(callback_data);
-}    
-
-
-#else
 static void
 _destructor(PyObject *obj)
 {
     void *callback_data = PyCapsule_GetContext(obj);
     PyMem_Free(callback_data);
 }
-#endif
 
 
 static int
@@ -195,7 +185,6 @@ static PyMethodDef _CTestMethods[] = {
 				      
 				      
 /* Initialize the module */
-#if PY_VERSION_HEX >= 0x03000000
 static struct PyModuleDef MOD = {
     PyModuleDef_HEAD_INIT,
     MODSTR,
@@ -214,12 +203,3 @@ PY3K_INIT(void)
 {
     return PyModule_Create(&MOD);
 }
-
-
-#else
-PyMODINIT_FUNC
-PY2K_INIT(void)
-{
-    Py_InitModule(MODSTR, _CTestMethods);
-}
-#endif

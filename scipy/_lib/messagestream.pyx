@@ -1,6 +1,6 @@
 cimport cython
 from libc cimport stdio, stdlib
-from cpython cimport PyBytes_FromStringAndSize, PY_VERSION_HEX
+from cpython cimport PyBytes_FromStringAndSize
 
 import os
 import sys
@@ -71,10 +71,7 @@ cdef class MessageStream:
             finally:
                 stdlib.free(buf)
 
-        if PY_VERSION_HEX >= 0x03000000:
-            return obj.decode('latin1')
-        else:
-            return obj
+        return obj.decode('latin1')
 
     def clear(self):
         stdio.rewind(self.handle)

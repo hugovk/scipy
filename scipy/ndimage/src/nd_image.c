@@ -450,12 +450,6 @@ static PyObject *Py_GenericFilter1D(PyObject *obj, PyObject *args)
         /* 'Legacy' low-level callable */
         func = PyCapsule_GetPointer(fnc, NULL);
         data = PyCapsule_GetContext(fnc);
-#if PY_VERSION_HEX < 0x03000000
-    } else if (PyCObject_Check(fnc)) {
-        /* 'Legacy' low-level callable on Py2 */
-        func = PyCObject_AsVoidPtr(fnc);
-        data = PyCObject_GetDesc(fnc);
-#endif
     } else {
         int ret;
 
@@ -577,12 +571,6 @@ static PyObject *Py_GenericFilter(PyObject *obj, PyObject *args)
     if (PyCapsule_CheckExact(fnc) && PyCapsule_GetName(fnc) == NULL) {
         func = PyCapsule_GetPointer(fnc, NULL);
         data = PyCapsule_GetContext(fnc);
-#if PY_VERSION_HEX < 0x03000000
-    } else if (PyCObject_Check(fnc)) {
-        /* 'Legacy' low-level callable on Py2 */
-        func = PyCObject_AsVoidPtr(fnc);
-        data = PyCObject_GetDesc(fnc);
-#endif
     } else {
         int ret;
 
@@ -788,12 +776,6 @@ static PyObject *Py_GeometricTransform(PyObject *obj, PyObject *args)
         if (PyCapsule_CheckExact(fnc) && PyCapsule_GetName(fnc) == NULL) {
             func = PyCapsule_GetPointer(fnc, NULL);
             data = PyCapsule_GetContext(fnc);
-#if PY_VERSION_HEX < 0x03000000
-        } else if (PyCObject_Check(fnc)) {
-            /* 'Legacy' low-level callable on Py2 */
-            func = PyCObject_AsVoidPtr(fnc);
-            data = PyCObject_GetDesc(fnc);
-#endif
         } else {
             int ret;
 
