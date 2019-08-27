@@ -7,17 +7,11 @@ MATLAB is a registered trademark of the Mathworks inc.
 """
 from __future__ import division, print_function, absolute_import
 
-import sys
 import operator
 
 from scipy._lib.six import reduce
 
 import numpy as np
-
-if sys.version_info[0] >= 3:
-    byteord = int
-else:
-    byteord = ord
 
 from scipy._lib import doccer
 
@@ -233,8 +227,8 @@ def get_matfile_version(fileobj):
     tst_str = fileobj.read(4)
     fileobj.seek(0)
     maj_ind = int(tst_str[2] == b'I'[0])
-    maj_val = byteord(tst_str[maj_ind])
-    min_val = byteord(tst_str[1-maj_ind])
+    maj_val = int(tst_str[maj_ind])
+    min_val = int(tst_str[1-maj_ind])
     ret = (maj_val, min_val)
     if maj_val in (1, 2):
         return ret
